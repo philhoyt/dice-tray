@@ -1,4 +1,3 @@
-// InitEngine.js
 import Matter from 'matter-js';
 
 let engine;
@@ -11,11 +10,12 @@ const initEngine = () => {
         engine = Matter.Engine.create();
         engine.world.gravity.y = 0; // Set gravity to zero
 
-        const width = 800;
-        const height = 600;
+        const container = document.getElementById('physics-canvas-container');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
 
         render = Matter.Render.create({
-            element: document.getElementById('physics-canvas'),
+            element: container,
             engine: engine,
             options: {
                 width: width,
@@ -39,23 +39,35 @@ const initEngine = () => {
         Matter.Runner.run(runner, engine);
         Matter.Render.run(render);
 
+        window.addEventListener('resize', handleResize);
+
         initialized = true;
     } else {
-        // Clear existing dice bodies
-        Matter.World.clear(engine.world, false);
-        // Re-add ground and walls
-        const width = render.options.width;
-        const height = render.options.height;
-
-        const borders = [
-            Matter.Bodies.rectangle(width / 2, 0, width, 50, { isStatic: true }), // Top border
-            Matter.Bodies.rectangle(width / 2, height, width, 50, { isStatic: true }), // Bottom border
-            Matter.Bodies.rectangle(0, height / 2, 50, height, { isStatic: true }), // Left border
-            Matter.Bodies.rectangle(width, height / 2, 50, height, { isStatic: true }) // Right border
-        ];
-
-        Matter.World.add(engine.world, borders);
+        handleResize();
     }
+};
+
+const handleResize = () => {
+    const container = document.getElementById('physics-canvas-container');
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    render.options.width = width;
+    render.options.height = height;
+    render.canvas.width = width;
+    render.canvas.height = height;
+
+    Matter.Engine.update(engine);
+
+    const borders = [
+        Matter.Bodies.rectangle(width / 2, 0, width, 50, { isStatic: true }), // Top border
+        Matter.Bodies.rectangle(width / 2, height, width, 50, { isStatic: true }), // Bottom border
+        Matter.Bodies.rectangle(0, height / 2, 50, height, { isStatic: true }), // Left border
+        Matter.Bodies.rectangle(width, height / 2, 50, height, { isStatic: true }) // Right border
+    ];
+
+    Matter.World.clear(engine.world, false);
+    Matter.World.add(engine.world, borders);
 };
 
 const getEngine = () => engine;
