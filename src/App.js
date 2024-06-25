@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DiceControls from './components/DiceControls';
 import DiceLoader from './components/DiceLoader';
 import DiceTray from './components/DiceTray';
 import Results from './components/Results';
+import RollHistory from './components/RollHistory';
 import './App.css';
 
 const App = () => {
     const [dice, setDice] = useState([]);
     const [results, setResults] = useState([]);
     const [total, setTotal] = useState(0);
+    const [history, setHistory] = useState([]);
+
+    useEffect(() => {
+        const savedHistory = localStorage.getItem('rollHistory');
+        if (savedHistory) {
+            setHistory(JSON.parse(savedHistory));
+        }
+    }, []);
 
     const handleAddDie = (type) => {
         setDice([...dice, type]);
@@ -43,6 +52,18 @@ const App = () => {
 
         setResults(newResults);
         setTotal(newTotal);
+
+        const newHistory = [
+            ...history,
+            { timestamp: Date.now(), dice, results: newResults, total: newTotal }
+        ];
+        setHistory(newHistory);
+        localStorage.setItem('rollHistory', JSON.stringify(newHistory));
+    };
+
+    const handleClearHistory = () => {
+        setHistory([]);
+        localStorage.removeItem('rollHistory');
     };
 
     return (
@@ -53,6 +74,7 @@ const App = () => {
             <button onClick={handleRollDice}>Roll Dice</button>
             <DiceTray results={results} onRemoveResult={handleRemoveResult} />
             <Results total={total} />
+            <RollHistory history={history} onClearHistory={handleClearHistory} />
         </div>
     );
 };
