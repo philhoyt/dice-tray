@@ -1,3 +1,4 @@
+// Results.js
 import React from 'react';
 
 const Results = ({ total }) => {

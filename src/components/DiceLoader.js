@@ -1,3 +1,4 @@
+//DiceLoader.js
 import React from 'react';
 
 const DiceLoader = ({ dice, onRemoveDie }) => {

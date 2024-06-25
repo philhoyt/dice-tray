@@ -1,3 +1,4 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import DiceControls from './components/DiceControls';
 import DiceLoader from './components/DiceLoader';

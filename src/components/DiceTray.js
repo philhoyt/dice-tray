@@ -1,3 +1,4 @@
+// DiceTray.js
 import React, { useEffect } from 'react';
 import setupPhysicsEngine from '../utils/PhysicsEngine';
 

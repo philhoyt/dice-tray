@@ -1,3 +1,4 @@
+// DiceControls.js
 import React from 'react';
 
 const DiceControls = ({ onAddDie, onClearDice }) => {
