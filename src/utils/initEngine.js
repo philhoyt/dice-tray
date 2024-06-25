@@ -4,7 +4,6 @@ let engine;
 let render;
 let runner;
 let initialized = false;
-let eventHandler;
 
 const initEngine = () => {
     if (!initialized) {
@@ -58,16 +57,8 @@ const initEngine = () => {
     }
 };
 
-const addRenderEventListener = (callback) => {
-    if (eventHandler) {
-        Matter.Events.off(render, 'afterRender', eventHandler);
-    }
-    eventHandler = callback;
-    Matter.Events.on(render, 'afterRender', eventHandler);
-};
-
 const getEngine = () => engine;
 const getRender = () => render;
 const getRenderOptions = () => render.options;
 
-export { initEngine, getEngine, getRender, getRenderOptions, addRenderEventListener };
+export { initEngine, getEngine, getRender, getRenderOptions };

@@ -6,9 +6,7 @@ const DiceLoader = ({ dice, onRemoveDie }) => {
             <h2>Dice Loader</h2>
             <ul>
                 {dice.map((die, index) => (
-                    <li key={index} onClick={() => onRemoveDie(index)}>
-                        {die}
-                    </li>
+                    <li key={index} onClick={() => onRemoveDie(index)}>{die}</li>
                 ))}
             </ul>
         </div>

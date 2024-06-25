@@ -1,4 +1,4 @@
-import { initEngine } from './initEngine';
+import { initEngine, getRender } from './initEngine';
 import createDice from './createDice';
 import renderDice from './renderDice';
 

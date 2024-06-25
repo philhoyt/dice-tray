@@ -8,14 +8,15 @@ const RollHistory = ({ history, onClearHistory }) => {
             <ul>
                 {history.map((entry, index) => (
                     <li key={index}>
-                        <div>{new Date(entry.timestamp).toLocaleString()}</div>
-                        <div>
-                            {entry.dice.map((die, i) => (
-                                <span key={i}>{die} </span>
+                        <p><strong>Timestamp:</strong> {new Date(entry.timestamp).toLocaleString()}</p>
+                        <p><strong>Loaded Dice:</strong> {entry.dice.join(', ')}</p>
+                        <p><strong>Results:</strong></p>
+                        <ul>
+                            {entry.results.map((result, idx) => (
+                                <li key={idx}>{result.die}: {result.result}</li>
                             ))}
-                        </div>
-                        <div>Results: {entry.results.map((res) => res.result).join(', ')}</div>
-                        <div>Total: {entry.total}</div>
+                        </ul>
+                        <p><strong>Total:</strong> {entry.total}</p>
                     </li>
                 ))}
             </ul>
