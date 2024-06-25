@@ -25,12 +25,8 @@ const DiceTray = ({ results }) => {
     }, [results]);
 
     return (
-        <div id="physics-canvas-container" style={{ width: '100%', height: '100%' }}>
-            <ul>
-                {results.map((result, index) => (
-                    <li key={index}>{result.die}: {result.result}</li>
-                ))}
-            </ul>
+        <div id="physics-canvas-container">
+
         </div>
     );
 };

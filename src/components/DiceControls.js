@@ -1,7 +1,6 @@
-// DiceControls.js
 import React from 'react';
 
-const DiceControls = ({ onAddDie, onClearDice }) => {
+const DiceControls = ({ onAddDie }) => {
     const diceTypes = ['D2', 'D4', 'D6', 'D8', 'D10', 'D12', 'D20', 'D100'];
 
     return (
@@ -10,7 +9,6 @@ const DiceControls = ({ onAddDie, onClearDice }) => {
             {diceTypes.map((type) => (
                 <button key={type} onClick={() => onAddDie(type)}>{type}</button>
             ))}
-            <button onClick={onClearDice}>Clear Dice</button>
         </div>
     );
 };

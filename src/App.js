@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import DiceControls from './components/DiceControls';
 import DiceLoader from './components/DiceLoader';
@@ -12,6 +11,7 @@ const App = () => {
     const [results, setResults] = useState([]);
     const [total, setTotal] = useState(0);
     const [history, setHistory] = useState([]);
+    const [modifier, setModifier] = useState(0);
 
     useEffect(() => {
         const savedHistory = localStorage.getItem('rollHistory');
@@ -31,13 +31,14 @@ const App = () => {
     };
 
     const handleRemoveDie = (index) => {
-        const newDice = dice.filter((_, i) => i !== index);
+        const newDice = [...dice];
+        newDice.splice(index, 1);
         setDice(newDice);
     };
 
     const handleRemoveResult = (index) => {
         const newResults = results.filter((_, i) => i !== index);
-        const newTotal = newResults.reduce((acc, curr) => acc + curr.result, 0);
+        const newTotal = newResults.reduce((acc, curr) => acc + curr.result, 0) + modifier;
         setResults(newResults);
         setTotal(newTotal);
     };
@@ -49,14 +50,14 @@ const App = () => {
             return { die, result };
         });
 
-        const newTotal = newResults.reduce((acc, curr) => acc + curr.result, 0);
+        const newTotal = newResults.reduce((acc, curr) => acc + curr.result, 0) + modifier;
 
         setResults(newResults);
         setTotal(newTotal);
 
         const newHistory = [
             ...history,
-            { timestamp: Date.now(), dice, results: newResults, total: newTotal }
+            { timestamp: Date.now(), dice, results: newResults, total: newTotal, modifier }
         ];
         setHistory(newHistory);
         localStorage.setItem('rollHistory', JSON.stringify(newHistory));
@@ -67,14 +68,23 @@ const App = () => {
         localStorage.removeItem('rollHistory');
     };
 
+    const handleModifierChange = (value) => {
+        setModifier(value);
+    };
+
     return (
         <div className="App">
             <h1>Dice Tray</h1>
-            <DiceControls onAddDie={handleAddDie} onClearDice={handleClearDice} />
-            <DiceLoader dice={dice} onRemoveDie={handleRemoveDie} />
+            <DiceControls onAddDie={handleAddDie} />
+            <DiceLoader
+                dice={dice}
+                onRemoveDie={handleRemoveDie}
+                onClearDice={handleClearDice}
+                onModifierChange={handleModifierChange}
+            />
             <button onClick={handleRollDice}>Roll Dice</button>
             <DiceTray results={results} onRemoveResult={handleRemoveResult} />
-            <Results total={total} />
+            <Results results={results} total={total} />
             <RollHistory history={history} onClearHistory={handleClearHistory} />
         </div>
     );
