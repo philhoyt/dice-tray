@@ -20,8 +20,7 @@ const setupPhysicsEngine = (dice = []) => {
                 width: width,
                 height: height,
                 wireframes: false,
-                background: 'black',
-                showVelocity: true
+                background: 'black'
             }
         });
 
@@ -52,19 +51,69 @@ const setupPhysicsEngine = (dice = []) => {
 
     // Create dice bodies
     const diceBodies = dice.map((die) => {
-        const sides = parseInt(die.substring(1), 10);
+        const sides = parseInt(die.die.substring(1), 10);
         const size = 40; // Adjust the size as needed
         const x = Math.random() * (render.options.width - size) + size / 2;
         const y = 50; // Start near the top of the canvas
 
-        const body = Matter.Bodies.rectangle(x, y, size, size, { restitution: 0.5 });
+        let body;
+        switch (sides) {
+            case 2:
+            case 100:
+                body = Matter.Bodies.circle(x, y, size / 2, { restitution: 0.5 });
+                break;
+            case 4:
+                body = Matter.Bodies.polygon(x, y, 3, size / 2, { restitution: 0.5 });
+                break;
+            case 6:
+                body = Matter.Bodies.rectangle(x, y, size, size, { restitution: 0.5 });
+                break;
+            case 8:
+                body = Matter.Bodies.polygon(x, y, 6, size / 2, { restitution: 0.5 });
+                break;
+            case 10:
+                body = Matter.Bodies.polygon(x, y, 5, size / 2, { restitution: 0.5 });
+                break;
+            case 12:
+                body = Matter.Bodies.polygon(x, y, 10, size / 2, { restitution: 0.5 });
+                break;
+            case 20:
+                body = Matter.Bodies.polygon(x, y, 6, size / 2, { restitution: 0.5 });
+                break;
+            default:
+                body = Matter.Bodies.rectangle(x, y, size, size, { restitution: 0.5 });
+                break;
+        }
+
         Matter.Body.setVelocity(body, { x: (Math.random() - 0.5) * 5, y: (Math.random() - 0.5) * 5 });
         Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.1);
+        
+        // Attach the result to the body
+        body.diceResult = die.result;
 
         return body;
     });
 
     Matter.World.add(engine.world, diceBodies);
+
+    // Render the result on each die
+    Matter.Events.on(render, 'afterRender', () => {
+        const context = render.context;
+        diceBodies.forEach((body) => {
+            const result = body.diceResult;
+            if (result) {
+                const { position, angle } = body;
+                context.save();
+                context.translate(position.x, position.y);
+                context.rotate(angle);
+                context.fillStyle = 'white';
+                context.font = '20px Tiny5';
+                context.textAlign = 'center';
+                context.fillText(result, 0, 0);
+                context.restore();
+            }
+        });
+    });
 
     return diceBodies;
 };

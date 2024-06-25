@@ -3,7 +3,10 @@ import setupPhysicsEngine from '../utils/PhysicsEngine';
 
 const DiceTray = ({ results }) => {
     useEffect(() => {
-        setupPhysicsEngine(results.map(result => result.die));
+        if (results.length > 0) {
+            const diceData = results.map(result => ({ die: result.die, result: result.result }));
+            setupPhysicsEngine(diceData);
+        }
     }, [results]);
 
     return (
