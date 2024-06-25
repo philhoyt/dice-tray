@@ -36,12 +36,7 @@ ul {
 
 li {
     padding: 5px 0;
-    cursor: pointer;
     font-family: 'Tiny5', 'Courier New', Courier, monospace;
-}
-
-li:hover {
-    background-color: gray;
 }
 
 #physics-canvas-container {
@@ -103,7 +98,10 @@ li:hover {
 }
 
 .total {
-	font-size: 24px;
+	font-size: 2rem;
 	margin-top: 10px;
 	color: yellow;
+	&::before {
+		content: 'Total: ';
+	}
 }
