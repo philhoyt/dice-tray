@@ -11,8 +11,8 @@ const RollHistory = ({ history, onClearHistory }) => {
     };
 
     return (
-        <div>
-            <h2>Roll History</h2>
+        <details>
+			<summary>Roll History</summary>
             <ul>
                 {history.slice().reverse().map((entry, index) => (
                     <li key={index}>
@@ -35,7 +35,7 @@ const RollHistory = ({ history, onClearHistory }) => {
                 ))}
             </ul>
             <button onClick={onClearHistory}>Clear History</button>
-        </div>
+        </details>
     );
 };
 
