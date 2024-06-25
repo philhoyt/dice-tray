@@ -40,7 +40,7 @@ const renderDice = (diceBodies) => {
                 context.save();
                 context.translate(position.x, position.y);
                 context.rotate(angle);
-                context.font = '20px Tiny5';
+                context.font = 'normal normal 20px/20px Tiny5';
                 context.fillStyle = 'white'; // Text color
                 context.textAlign = 'center';
                 context.textBaseline = 'middle'; // Ensure vertical alignment
