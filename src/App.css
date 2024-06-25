@@ -36,12 +36,7 @@ ul {
 
 li {
     padding: 5px 0;
-    cursor: pointer;
     font-family: 'Tiny5', 'Courier New', Courier, monospace;
-}
-
-li:hover {
-    background-color: gray;
 }
 
 #physics-canvas-container {

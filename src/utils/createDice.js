@@ -1,4 +1,3 @@
-// CreateDice.js
 import Matter from 'matter-js';
 import { getEngine, getRenderOptions } from './initEngine';
 
@@ -52,7 +51,12 @@ const createDice = (dice) => {
                 body = Matter.Bodies.polygon(x, y, 10, size / 2, { restitution: 0.5 });
                 break;
             case 20:
-                body = Matter.Bodies.polygon(x, y, 6, size / 2, { restitution: 0.5 });
+                body = Matter.Bodies.rectangle(x, y, 71, 80, { restitution: 0.5 });
+                body.render.sprite = {
+                    texture: '/svgs/d20.svg',
+                    xScale: 71 / 40,
+                    yScale: 80 / 40,
+                };
                 break;
             case 100:
                 body = Matter.Bodies.circle(x, y, size / 2, { restitution: 0.5 });
