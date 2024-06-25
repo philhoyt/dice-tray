@@ -15,13 +15,18 @@ const Results = ({ results = [], total }) => {
                     </li>
                 ))}
             </ul>
-			<div className='total'>
             {modifier !== 0 ? (
-                <p>Total: {diceTotal} {modifierSign} = {total}</p>
+                <p className="total">
+                    <span className="dice-total">{diceTotal} </span> 
+                    <span className="modifier-sign">{modifierSign}</span> 
+                    <span className="total-equals"> = </span> 
+                    <span className="total-value">{total}</span>
+                </p>
             ) : (
-                <p>Total: {total}</p>
+                <p className="total">
+                    <span className="total-value"> {total}</span>
+                </p>
             )}
-			</div>
         </div>
     );
 };
