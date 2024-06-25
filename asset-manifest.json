@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/dice-tray/static/css/main.ba8ec086.css",
+    "main.js": "/dice-tray/static/js/main.1e134a60.js",
+    "static/js/453.295fa98e.chunk.js": "/dice-tray/static/js/453.295fa98e.chunk.js",
+    "index.html": "/dice-tray/index.html",
+    "main.ba8ec086.css.map": "/dice-tray/static/css/main.ba8ec086.css.map",
+    "main.1e134a60.js.map": "/dice-tray/static/js/main.1e134a60.js.map",
+    "453.295fa98e.chunk.js.map": "/dice-tray/static/js/453.295fa98e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ba8ec086.css",
+    "static/js/main.1e134a60.js"
+  ]
+}
