@@ -25,6 +25,13 @@ const App = () => {
         setDice(newDice);
     };
 
+    const handleRemoveResult = (index) => {
+        const newResults = results.filter((_, i) => i !== index);
+        const newTotal = newResults.reduce((acc, curr) => acc + curr.result, 0);
+        setResults(newResults);
+        setTotal(newTotal);
+    };
+
     const handleRollDice = () => {
         const newResults = dice.map((die) => {
             const sides = parseInt(die.substring(1), 10);
@@ -44,7 +51,7 @@ const App = () => {
             <DiceControls onAddDie={handleAddDie} onClearDice={handleClearDice} />
             <DiceLoader dice={dice} onRemoveDie={handleRemoveDie} />
             <button onClick={handleRollDice}>Roll Dice</button>
-            <DiceTray results={results} />
+            <DiceTray results={results} onRemoveResult={handleRemoveResult} />
             <Results total={total} />
         </div>
     );

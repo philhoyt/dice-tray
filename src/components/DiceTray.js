@@ -1,12 +1,12 @@
 import React from 'react';
 
-const DiceTray = ({ results }) => {
+const DiceTray = ({ results, onRemoveResult }) => {
     return (
         <div>
             <h2>Dice Tray</h2>
             <ul>
                 {results.map((result, index) => (
-                    <li key={index}>{result.die}: {result.result}</li>
+                    <li key={index} onClick={() => onRemoveResult(index)}>{result.die}: {result.result}</li>
                 ))}
             </ul>
         </div>
