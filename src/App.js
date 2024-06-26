@@ -12,6 +12,8 @@ const App = () => {
     const [total, setTotal] = useState(0);
     const [history, setHistory] = useState([]);
     const [modifier, setModifier] = useState(0);
+    const [rollType, setRollType] = useState('normal');
+    const [discardedRolls, setDiscardedRolls] = useState([]);
 
     useEffect(() => {
         const savedHistory = localStorage.getItem('rollHistory');
@@ -29,6 +31,7 @@ const App = () => {
         setResults([]);
         setTotal(0);
         setModifier(0);
+        setDiscardedRolls([]);
     };
 
     const handleRemoveDie = (index) => {
@@ -44,21 +47,46 @@ const App = () => {
     };
 
     const handleRollDice = () => {
-        const newResults = dice.map((die) => {
-            const sides = parseInt(die.substring(1), 10);
-            const result = Math.floor(Math.random() * sides) + 1;
+        const rollDice = () => {
+            return dice.map((die) => {
+                const sides = parseInt(die.substring(1), 10);
+                return Math.floor(Math.random() * sides) + 1;
+            });
+        };
+
+        const roll1 = rollDice();
+        const roll2 = rollDice();
+
+        const total1 = roll1.reduce((acc, curr) => acc + curr, 0);
+        const total2 = roll2.reduce((acc, curr) => acc + curr, 0);
+
+        let finalTotal;
+        let discarded;
+        if (rollType === 'advantage') {
+            finalTotal = Math.max(total1, total2);
+            discarded = total1 === finalTotal ? roll2 : roll1;
+        } else if (rollType === 'disadvantage') {
+            finalTotal = Math.min(total1, total2);
+            discarded = total1 === finalTotal ? roll2 : roll1;
+        } else {
+            finalTotal = total1;
+            discarded = [];
+        }
+
+        const newResults = dice.map((die, index) => {
+            const result = finalTotal === total1 ? roll1[index] : roll2[index];
             return { die, result };
         });
 
-        const diceTotal = newResults.reduce((acc, curr) => acc + curr.result, 0);
-        const newTotal = diceTotal + modifier;
+        const newTotal = finalTotal + modifier;
 
         setResults(newResults);
         setTotal(newTotal);
+        setDiscardedRolls(discarded);
 
         const newHistory = [
             ...history,
-            { timestamp: Date.now(), dice, results: newResults, modifier, total: newTotal }
+            { timestamp: Date.now(), dice, results: newResults, modifier, total: newTotal, discardedRolls: discarded, rollType }
         ];
         setHistory(newHistory);
         localStorage.setItem('rollHistory', JSON.stringify(newHistory));
@@ -78,9 +106,17 @@ const App = () => {
             <h1>Dice Tray</h1>
             <DiceControls onAddDie={handleAddDie} onClearDice={handleClearDice} />
             <DiceLoader dice={dice} onRemoveDie={handleRemoveDie} onClearDice={handleClearDice} onModifierChange={handleModifierChange} />
+            <div className="radio-group">
+                <input type="radio" id="normal" name="rollType" value="normal" checked={rollType === 'normal'} onChange={() => setRollType('normal')} />
+                <label htmlFor="normal">Normal</label>
+                <input type="radio" id="advantage" name="rollType" value="advantage" checked={rollType === 'advantage'} onChange={() => setRollType('advantage')} />
+                <label htmlFor="advantage">Advantage</label>
+                <input type="radio" id="disadvantage" name="rollType" value="disadvantage" checked={rollType === 'disadvantage'} onChange={() => setRollType('disadvantage')} />
+                <label htmlFor="disadvantage">Disadvantage</label>
+            </div>
             <button onClick={handleRollDice}>Roll Dice</button>
             <DiceTray results={results} onRemoveResult={handleRemoveResult} />
-            <Results total={total} results={results} />
+            <Results total={total} results={results} discardedRoll={discardedRolls} />
             <RollHistory history={history} onClearHistory={handleClearHistory} />
         </div>
     );

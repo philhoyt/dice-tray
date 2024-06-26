@@ -12,7 +12,7 @@ const RollHistory = ({ history, onClearHistory }) => {
 
     return (
         <details>
-			<summary>Roll History</summary>
+            <summary>Roll History</summary>
             <ul>
                 {history.slice().reverse().map((entry, index) => (
                     <li key={index}>
@@ -27,6 +27,9 @@ const RollHistory = ({ history, onClearHistory }) => {
                         </p>
                         <p>
                             <strong>Modifier:</strong> {entry.modifier >= 0 ? `+ ${entry.modifier}` : `- ${Math.abs(entry.modifier)}`}
+                        </p>
+                        <p>
+                            <strong>Roll Type:</strong> {(entry.rollType || 'normal').charAt(0).toUpperCase() + (entry.rollType || 'normal').slice(1)}
                         </p>
                         <p>
                             <strong>Total:</strong> {entry.total}
