@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DiceControls = ({ onAddDie }) => {
-    const diceTypes = ['D2', 'D4', 'D6', 'D8', 'D10', 'D12', 'D20', 'D100'];
+    const diceTypes = ['D4', 'D6', 'D8', 'D10', 'D12', 'D20', 'D100'];
 
     return (
         <div>
