@@ -1,13 +1,12 @@
-// PhysicsEngine.js
 import { initEngine } from './initEngine';
 import createDice from './createDice';
 import renderDice from './renderDice';
 
-const setupPhysicsEngine = (dice = []) => {
+const setupPhysicsEngine = async (dice = []) => {
     initEngine();
 
     // Create dice bodies
-    const diceBodies = createDice(dice);
+    const diceBodies = await createDice(dice);
 
     // Render the dice results
     renderDice(diceBodies);
