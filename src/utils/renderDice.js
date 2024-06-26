@@ -43,7 +43,7 @@ const renderDice = (diceBodies) => {
                 context.font = 'normal normal 20px/20px Tiny5';
                 context.fillStyle = 'white'; // Text color
                 context.textAlign = 'center';
-                context.textBaseline = 'middle'; // Ensure vertical alignment
+                context.textBaseline = 'middle';
                 context.fillText(result, 0, 0);
                 context.restore();
             }

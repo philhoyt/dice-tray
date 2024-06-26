@@ -8,6 +8,23 @@ const Results = ({ results = [], total, discardedRoll }) => {
     return (
         <div>
             <h2>Results</h2>
+            {modifier !== 0 ? (
+                <div>
+                    <p>
+                        <span className='modifier'>Modifier: {modifier}</span>
+                    </p>
+                    <p className="total">
+                        <span className="dice-total">{diceTotal} </span> 
+                        <span className="modifier-sign">{modifierSign}</span> 
+                        <span className="total-equals"> = </span> 
+                        <span className="total-value">{total}</span>
+                    </p>
+                </div>
+            ) : (
+                <p className="total">
+                    <span className="total-value"> {total}</span>
+                </p>
+            )}
 			<div className='results-dice'>
 				<div>
 					<ul>
@@ -30,23 +47,6 @@ const Results = ({ results = [], total, discardedRoll }) => {
 					</div>
 				)}
 			</div>
-            {modifier !== 0 ? (
-                <div>
-                    <p>
-                        <span className='modifier'>Modifier: {modifier}</span>
-                    </p>
-                    <p className="total">
-                        <span className="dice-total">{diceTotal} </span> 
-                        <span className="modifier-sign">{modifierSign}</span> 
-                        <span className="total-equals"> = </span> 
-                        <span className="total-value">{total}</span>
-                    </p>
-                </div>
-            ) : (
-                <p className="total">
-                    <span className="total-value"> {total}</span>
-                </p>
-            )}
         </div>
     );
 };

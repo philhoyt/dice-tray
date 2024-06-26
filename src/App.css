@@ -6,7 +6,7 @@ body {
 
 .App {
     text-align: center;
-    padding: 20px;
+    padding: 0 20px 20px;
 }
 
 h1, h2 {
@@ -77,6 +77,7 @@ li {
 .total {
 	font-size: 2rem;
 	margin-top: 10px;
+	margin-bottom: 0;
 	color: yellow;
 	&::before {
 		content: 'Total: ';
@@ -117,6 +118,7 @@ button {
     align-items: center;
     justify-content: center;
     gap: 1rem;
+	margin-bottom: 1.5rem;
 }
 
 .results-dice__discarded {
