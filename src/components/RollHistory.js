@@ -31,7 +31,7 @@ const RollHistory = ({ history, onClearHistory }) => {
                         <p>
                             <strong>Roll Type:</strong> {(entry.rollType || 'normal').charAt(0).toUpperCase() + (entry.rollType || 'normal').slice(1)}
                         </p>
-                        <p>
+                        <p className='history-total'>
                             <strong>Total:</strong> {entry.total}
                         </p>
                     </li>

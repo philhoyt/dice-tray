@@ -46,35 +46,35 @@ const createDice = async (dice) => {
         switch (sides) {
             case 2:
                 body = Matter.Bodies.circle(x, y, size / 2, { restitution: 0.5 });
-                texture = '/dice-tray/svgs/d2.svg';
+                texture = '/svgs/d2.svg';
                 break;
             case 4:
                 body = Matter.Bodies.polygon(x, y, 3, size / 2, { restitution: 0.5 });
-                texture = '/dice-tray/svgs/d4.svg';
+                texture = '/svgs/d4.svg';
                 break;
             case 6:
                 body = Matter.Bodies.rectangle(x, y, size, size, { restitution: 0.5 });
-                texture = '/dice-tray/svgs/d6.svg';
+                texture = `/svgs/d6.svg`;
                 break;
             case 8:
                 body = Matter.Bodies.polygon(x, y, 6, size / 2, { restitution: 0.5 });
-                texture = '/dice-tray/svgs/d8.svg';
+                texture = '/svgs/d8.svg';
                 break;
             case 10:
                 body = Matter.Bodies.polygon(x, y, 5, size / 2, { restitution: 0.5 });
-                texture = '/dice-tray/svgs/d10.svg';
+                texture = '/svgs/d10.svg';
                 break;
             case 12:
                 body = Matter.Bodies.polygon(x, y, 10, size / 2, { restitution: 0.5 });
-                texture = '/dice-tray/svgs/d12.svg';
+                texture = '/svgs/d12.svg';
                 break;
             case 20:
                 body = Matter.Bodies.rectangle(x, y, 50, 50, { restitution: 0.5 });
-                texture = '/dice-tray/svgs/d20.svg';
+                texture = '/svgs/d20.svg';
                 break;
             case 100:
                 body = Matter.Bodies.circle(x, y, size / 2, { restitution: 0.5 });
-                texture = '/dice-tray/svgs/d100.svg';
+                texture = '/svgs/d100.svg';
                 break;
             default:
                 body = Matter.Bodies.rectangle(x, y, size, size, { restitution: 0.5 });

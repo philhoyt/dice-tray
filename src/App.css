@@ -124,3 +124,7 @@ button {
 .results-dice__discarded {
 	text-decoration: line-through;
 }
+
+.history-total {
+	color: yellow;
+}
