@@ -4,7 +4,7 @@ import DiceLoader from './components/DiceLoader';
 import DiceTray from './components/DiceTray';
 import Results from './components/Results';
 import RollHistory from './components/RollHistory';
-//import BuyMeCoffee from './components/BuyMeCoffee';
+import BuyMeCoffee from './components/BuyMeCoffee';
 import './App.css';
 
 const App = () => {
@@ -104,9 +104,9 @@ const App = () => {
 
     return (
         <div className="App">
-			<div>
-            	<h1>Dice Tray</h1>
-			</div>
+            <div>
+                <h1>Dice Tray</h1>
+            </div>
             <DiceControls onAddDie={handleAddDie} onClearDice={handleClearDice} />
             <DiceLoader dice={dice} onRemoveDie={handleRemoveDie} onClearDice={handleClearDice} onModifierChange={handleModifierChange} />
             <div className="radio-group">
@@ -121,6 +121,7 @@ const App = () => {
             <DiceTray results={results} onRemoveResult={handleRemoveResult} />
             <Results total={total} results={results} discardedRoll={discardedRolls} />
             <RollHistory history={history} onClearHistory={handleClearHistory} />
+            <BuyMeCoffee />
         </div>
     );
 };

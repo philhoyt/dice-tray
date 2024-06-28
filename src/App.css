@@ -14,6 +14,10 @@ h1, h2 {
     padding-bottom: 5px;
 }
 
+a {
+    color: white;
+}
+
 button {
     background-color: white;
     color: black;
@@ -40,52 +44,13 @@ li {
 }
 
 #physics-canvas-container {
-	position: fixed;
-	height: 100vh;
-	width: 100vw;
-	top: 0;
-	left: 0;
-	z-index: -1;
-	opacity: .8;
-}
-
-.modifier-container {
-    margin-top: 10px;
-}
-
-.modifier-input {
-    margin-left: 5px;
-    padding: 5px 10px;
-    font-size: 16px;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s;
-	border-radius: 0;
-	border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-family: 'Tiny5', 'Courier New', Courier, monospace;
-	width: 2rem;
-}
-
-.modifier-input:focus,
-.modifier-input:hover {
-    background-color: #ddd;
-}
-
-.total {
-	font-size: 2rem;
-	margin-top: 10px;
-	margin-bottom: 0;
-	color: yellow;
-	&::before {
-		content: 'Total: ';
-	}
-}
-
-button {
-    margin: 5px;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: .8;
 }
 
 .modifier-container {
@@ -95,6 +60,34 @@ button {
 .modifier-input,
 .modifier-reset {
     margin-left: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+    border: none;
+    font-family: 'Tiny5', 'Courier New', Courier, monospace;
+}
+
+.modifier-input {
+    width: 2rem;
+}
+
+.modifier-input:focus,
+.modifier-input:hover {
+    background-color: #ddd;
+}
+
+.total {
+    font-size: 2rem;
+    margin-top: 10px;
+    margin-bottom: 0;
+    color: yellow;
+}
+
+.total::before {
+    content: 'Total: ';
 }
 
 .radio-group {
@@ -114,17 +107,17 @@ button {
 }
 
 .results-dice {
-	display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-	margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .results-dice__discarded {
-	text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .history-total {
-	color: yellow;
+    color: yellow;
 }
